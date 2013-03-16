@@ -30,7 +30,6 @@
         <cTool>
           <incDir>
             <pElem>../arduino_corelib</pElem>
-            <pElem>../cyberdine_corelib</pElem>
           </incDir>
           <commandLine>-gstabs+ -Wall -Os -ffunction-sections -fdata-sections -mmcu=atmega328p</commandLine>
           <preprocessorList>
@@ -43,7 +42,6 @@
         <ccTool>
           <incDir>
             <pElem>../arduino_corelib</pElem>
-            <pElem>../cyberdine_corelib</pElem>
           </incDir>
           <commandLine>-gstabs+ -Wall -Os -fno-exceptions -ffunction-sections -fdata-sections -mmcu=atmega328p</commandLine>
           <preprocessorList>

@@ -69,7 +69,7 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/esc_test.exe: ${OBJECTFILES}
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
-	$(COMPILE.cc) -g -DARDUINO=103 -DF_CPU=16000000UL -D_DEBUG_ -D__AVR_ATmega328P__ -I../arduino_corelib -I../cyberdine_corelib -gstabs+ -Wall -Os -fno-exceptions -ffunction-sections -fdata-sections -mmcu=atmega328p -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -DARDUINO=103 -DF_CPU=16000000UL -D_DEBUG_ -D__AVR_ATmega328P__ -I../arduino_corelib -gstabs+ -Wall -Os -fno-exceptions -ffunction-sections -fdata-sections -mmcu=atmega328p -MMD -MP -MF $@.d -o ${OBJECTDIR}/main.o main.cpp
 
 # Subprojects
 .build-subprojects:
