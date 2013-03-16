@@ -52,15 +52,13 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=../arduino_corelib/dist/Debug/Arduino-Windows/libarduino_corelib.a ../cyberdine_corelib/dist/Debug/Arduino-Windows/libcyberdine_corelib.a -lm
+LDLIBSOPTIONS=../arduino_corelib/dist/Debug/Arduino-Windows/libarduino_corelib.a -lm
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
 	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/esc_test.exe
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/esc_test.exe: ../arduino_corelib/dist/Debug/Arduino-Windows/libarduino_corelib.a
-
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/esc_test.exe: ../cyberdine_corelib/dist/Debug/Arduino-Windows/libcyberdine_corelib.a
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/esc_test.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}

@@ -66,18 +66,6 @@
                             OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libarduino_corelib.a">
               </makeArtifact>
             </linkerLibProjectItem>
-            <linkerLibProjectItem>
-              <makeArtifact PL="../cyberdine_corelib"
-                            CT="3"
-                            CN="Debug"
-                            AC="true"
-                            BL="false"
-                            WD="../cyberdine_corelib"
-                            BC="${MAKE}  -f Makefile CONF=Debug"
-                            CC="${MAKE}  -f Makefile CONF=Debug clean"
-                            OP="${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libcyberdine_corelib.a">
-              </makeArtifact>
-            </linkerLibProjectItem>
             <linkerLibStdlibItem>Mathematics</linkerLibStdlibItem>
           </linkerLibItems>
           <commandLine>-gstabs+ -Os -Wl,--gc-sections -mmcu=atmega328p</commandLine>

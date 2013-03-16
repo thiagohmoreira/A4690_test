@@ -163,19 +163,6 @@ void getConfigs() {
     Serial.println(response, BIN);
 }
 
-void checkButtons() {
-    //If button pressed
-    if (digitalRead(SW2_PIN) == LOW) {
-        if (bitRead(state, 0)) {
-            motorCoast();
-            bitClear(state, 0);
-        } else {
-            motorRun();
-            bitSet(state, 0);
-        }
-    }
-}
-
 uint16_t motorRun() {
     Serial.println("Running...");
     //spiTransfer(RUN_W | 0b001000001011); //Reverse
