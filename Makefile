@@ -60,7 +60,6 @@ AVERDUDE=avrdude
 MCU=atmega328p
 
 #Avrdude config
-AVERDUDE_CFG=../../../../arduino-1.0.3/hardware/tools/avr/etc/avrdude.conf
 AVRDUDE_PROGRAMMER=arduino
 AVRDUDE_PORT=COM6
 
@@ -100,7 +99,7 @@ build: .build-post
 	${SIZE} --mcu=${MCU} -C ${CND_ARTIFACT_PATH_${CONF}}
 	
 upload: .build-post
-	${AVERDUDE} -D -C ${AVERDUDE_CFG} -p ${MCU} \
+	${AVERDUDE} -D -p ${MCU} \
 	    -c ${AVRDUDE_PROGRAMMER} -P ${AVRDUDE_PORT} \
 	    -U flash:w:${CND_ARTIFACT_PATH_${CONF}}.hex:i 
 
