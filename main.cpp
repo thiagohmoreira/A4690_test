@@ -16,20 +16,15 @@ void setup() {
     pinMode(TACHO_PIN, INPUT);
     pinMode(CS_PIN, OUTPUT);
     
-    pinMode(SW2_PIN, INPUT_PULLUP);
-    pinMode(SW3_PIN, INPUT_PULLUP);
-
     Serial.begin(9600);
 
     SPI.begin();
     //SPI Config (Datasheet, pg. 10,23,24)
-    SPI.setBitOrder(MSBFIRST);
-    SPI.setDataMode(SPI_MODE3); //Clock pol = 1 | Clock phase = 1
+    //SPI.setBitOrder(MSBFIRST);
+    //SPI.setDataMode(SPI_MODE3); //Clock pol = 1 | Clock phase = 1
     //SPI.setClockDivider(SPI_CLOCK_DIV4); //Default 4 MHz speed should be OK
     
-    getConfigs();
-    initConfigs();
-    getConfigs();
+    TCCR2B = TCCR2B & 0b11111000 | 0x01;
 }
 
 void loop() {
@@ -49,13 +44,43 @@ void loop() {
     readTacho(now);
 
     //Adjust PWM
-    if (bitRead(state, 0) == 1 && pwmValue < 255 && now - lastPWMUpdate > 1000) {
-        analogWrite(PWM_PIN, ++pwmValue);
-        lastPWMUpdate = now;
-    }
+    uint8_t tmp;
+    if (Serial.available() > 0) {
+        tmp = Serial.read();
+
+        switch (tmp) {
+            case '+':
+                pwmValue += 20;
+                
+                analogWrite(PWM_PIN, pwmValue);
+                Serial.println(pwmValue);
+                break;
+
+            case '-':
+                pwmValue -= 20;
+                
+                analogWrite(PWM_PIN, pwmValue);
+                Serial.println(pwmValue);
+                break;
+                
+            case '1':
+                motorRun();
+                break;
+
+            case '0':
+                motorCoast();
+                break;
+
+            case '9':
+                getConfigs();
+                initConfigs();
+                getConfigs();
+                break;
+        }
+    }     
 
     //Send serial info, every 500ms
-    if (now - lastSerialUpdate > 500) {
+    if (now - lastSerialUpdate > 5000) {
         Serial.print("Time: ");
         Serial.print(now);
         Serial.print(" - State: ");
@@ -159,8 +184,8 @@ uint16_t motorRun() {
 
 uint16_t motorCoast() {
     Serial.println("Coast...");
-    return spiTransfer(RUN_W | 0b001000001000); //Coast
     analogWrite(PWM_PIN, 0);
+    return spiTransfer(RUN_W | 0b001000001000); //Coast
 }
 
 uint16_t motorBrake() {
@@ -210,12 +235,12 @@ uint16_t spiTransfer(uint16_t value) {
     digitalWrite(CS_PIN, HIGH);
 
     //If there is any error
-    if ((ret & ERROR_MASK) > 0) {
+    /*if ((ret & ERROR_MASK) > 0) {
         Serial.print("Sent: ");
         Serial.print(value, BIN);
         Serial.print(" - ");
         printError(ret);
-    }
+    }*/
 
     return ret;
 }

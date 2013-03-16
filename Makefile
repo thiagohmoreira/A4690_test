@@ -60,7 +60,7 @@ AVERDUDE=avrdude
 MCU=atmega328p
 
 #Avrdude config
-AVERDUDE_CFG=../../../../../arduino-1.0.3/hardware/tools/avr/etc/avrdude.conf
+AVERDUDE_CFG=../../../../arduino-1.0.3/hardware/tools/avr/etc/avrdude.conf
 AVRDUDE_PROGRAMMER=arduino
 AVRDUDE_PORT=COM6
 
