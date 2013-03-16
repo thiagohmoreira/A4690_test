@@ -29,9 +29,6 @@ void setup() {
 
 void loop() {
     uint32_t now = millis();
-
-    //Check for buttons changes
-    checkButtons();
     
     //Check for errors
     uint16_t diag = spiTransfer(DIAG_R);
